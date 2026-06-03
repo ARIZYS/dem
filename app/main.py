@@ -354,6 +354,11 @@ class LoginDialog(QDialog):
             QLabel {{ color: black; }}
             QLineEdit {{ color: black; background-color: white; }}
             QComboBox {{ color: black; background-color: white; }}
+            QComboBox QAbstractItemView {{
+                background-color: white;
+                color: black;
+                selection-background-color: {COLOR_ACCENT};
+            }}
         """)
         
         root = QVBoxLayout(self)
@@ -429,6 +434,11 @@ class ProductFormDialog(QDialog):
             QLabel {{ color: black; }}
             QLineEdit {{ color: black; background-color: white; }}
             QComboBox {{ color: black; background-color: white; }}
+            QComboBox QAbstractItemView {{
+                background-color: white;
+                color: black;
+                selection-background-color: {COLOR_ACCENT};
+            }}
             QTextEdit {{ color: black; background-color: white; }}
         """)
 
@@ -656,10 +666,29 @@ class OrderFormDialog(QDialog):
         self.setFont(font)
         self.setStyleSheet(f"""
             QDialog {{ background-color: {COLOR_WHITE}; }}
-            QLabel {{ color: black; }}
+            QLabel {{ color: black; background-color: transparent; }}
             QLineEdit {{ color: black; background-color: white; }}
-            QComboBox {{ color: black; background-color: white; }}
-            QDateEdit {{ color: black; background-color: white; }}
+            QComboBox {{ 
+                color: black; 
+                background-color: white;
+                selection-background-color: {COLOR_ACCENT};
+            }}
+            QComboBox QAbstractItemView {{
+                background-color: white;
+                color: black;
+                selection-background-color: {COLOR_ACCENT};
+                selection-color: black;
+            }}
+            QDateEdit {{ 
+                color: black; 
+                background-color: white;
+            }}
+            QDateEdit QAbstractItemView {{
+                background-color: white;
+                color: black;
+                selection-background-color: {COLOR_ACCENT};
+            }}
+            QPushButton {{ color: black; }}
         """)
 
         root = QVBoxLayout(self)
@@ -784,10 +813,60 @@ class OrdersDialog(QDialog):
         # Установка шрифта Calibri
         font = QFont("Calibri", 10)
         self.setFont(font)
+        
+        # Полные стили для диалога заказов
         self.setStyleSheet(f"""
-            QDialog {{ background-color: {COLOR_WHITE}; }}
-            QLabel {{ color: black; }}
-            QPushButton {{ color: black; }}
+            QDialog {{ 
+                background-color: {COLOR_WHITE}; 
+            }}
+            QLabel {{ 
+                color: black; 
+                background-color: transparent;
+            }}
+            QLineEdit {{ 
+                color: black; 
+                background-color: white;
+                selection-background-color: {COLOR_ACCENT};
+            }}
+            QComboBox {{ 
+                color: black; 
+                background-color: white;
+                selection-background-color: {COLOR_ACCENT};
+            }}
+            QComboBox QAbstractItemView {{
+                background-color: white;
+                color: black;
+                selection-background-color: {COLOR_ACCENT};
+                selection-color: black;
+            }}
+            QDateEdit {{ 
+                color: black; 
+                background-color: white;
+            }}
+            QDateEdit QAbstractItemView {{
+                background-color: white;
+                color: black;
+                selection-background-color: {COLOR_ACCENT};
+            }}
+            QPushButton {{ 
+                color: black; 
+                font-family: Calibri; 
+                font-size: 10pt;
+                padding: 5px;
+            }}
+            QTableWidget {{
+                background-color: white;
+                alternate-background-color: #F0F0F0;
+            }}
+            QTableWidget::item {{
+                color: black;
+            }}
+            QHeaderView::section {{
+                background-color: {COLOR_SECOND};
+                color: black;
+                font-weight: bold;
+                padding: 5px;
+            }}
         """)
 
         root = QVBoxLayout(self)
@@ -846,11 +925,6 @@ class OrdersDialog(QDialog):
         )
         self.table.doubleClicked.connect(self.double_click_order)
         self.table.setFont(QFont("Calibri", 10))
-        self.table.setStyleSheet("""
-            QTableWidget { background-color: white; }
-            QTableWidget::item { color: black; }
-            QHeaderView::section { background-color: #00FFFF; color: black; }
-        """)
         root.addWidget(self.table)
 
         is_admin = self.user_data.role_name == "Администратор"
@@ -1091,6 +1165,11 @@ class ProductsWindow(QMainWindow):
             QLabel {{ color: black; }}
             QLineEdit {{ color: black; background-color: white; }}
             QComboBox {{ color: black; background-color: white; }}
+            QComboBox QAbstractItemView {{
+                background-color: white;
+                color: black;
+                selection-background-color: {COLOR_ACCENT};
+            }}
             QPushButton {{ color: black; }}
         """)
 
@@ -1303,3 +1382,107 @@ def main():
 
 if __name__ == "__main__":
     main()
+# Шаг 11.1. Зафиксируйте локальный git-коммит (модули 2-4)
+# Что делаем
+# Сделайте локальный коммит после реализации функционала модулей 2–4.
+# Команды/код
+# cd C:\shoe_store_2026_pu_python
+# git init
+# git add app
+# git commit -m "Реализованы модули 2-4 (Python, Вариант 1 2026)"
+
+# Шаг 12. Подготовьте блок-схему алгоритма по ГОСТ и сохраните PDF
+# Что делаем
+# Оформите блок-схему алгоритма разработки приложения согласно ГОСТ 19.701-90.
+# Команды/код
+# 1. Откройте draw.io (diagrams.net).
+# 2. Создайте новую схему: File -> New -> Blank Diagram.
+# 3. Выставьте формат страницы A4 (Меню Файл -> Параметры страницы).
+# 4. Соберите блок-схему по ГОСТ 19.701-90:
+# • Блок начала/конца (овал): Начало.
+# • Процесс (прямоугольник): Открыть окно входа.
+# • Ввод/вывод (параллелограмм): Ввод логина и пароля / выбор "Войти как гость".
+# 43
+# • Решение (ромб): Гость?.
+# • Процесс: Показать список товаров (роль Гость) (ветка Да).
+# • Решение: Логин/пароль верны? (ветка Нет -> Сообщение об ошибке -> возврат к вводу).
+# • Процесс: Определить роль (клиент/менеджер/администратор) (ветка Да).
+# • Процесс: Показать список товаров.
+# • Процесс: Поиск/фильтр/сортировка.
+# • Решение: Роль позволяет редактирование?.
+# • Процесс: CRUD товаров и заказов (для менеджера/администратора).
+# • Блок начала/конца (овал): Выход.
+# 5. Соедините блоки стрелками по потоку выполнения.
+# 6. Сохраните исходник схемы:
+# • C:\shoe_store_2026_pu_python\docs\algorithm_gost.drawio
+# 7. Экспортируйте в PDF:
+# • C:\shoe_store_2026_pu_python\docs\algorithm_gost.pdf
+
+# Команды/код
+# Создайте файл:
+# • C:\shoe_store_2026_pu_python\docs\report_screenshots.docx
+# Добавьте скриншоты:
+# • окно входа;
+# • вход как гость;
+# • вход под менеджером;
+# • вход под администратором;
+# • поиск/фильтрация/сортировка;
+# • добавление/редактирование/удаление товара;
+# • окно заказов;
+# • добавление/редактирование/удаление заказа.
+
+# Шаг 13. Подготовьте DOCX со скриншотами корректной работы
+# Что делаем
+# Соберите скриншоты основных сценариев.
+# Команды/код
+# Создайте файл:
+# • C:\shoe_store_2026_pu_python\docs\report_screenshots.docx
+# Добавьте скриншоты:
+# • окно входа;
+# • вход как гость;
+# • вход под менеджером;
+# • вход под администратором;
+# • поиск/фильтрация/сортировка;
+# • добавление/редактирование/удаление товара;
+# • окно заказов;
+# • добавление/редактирование/удаление заказа.
+
+# Шаг 14. Экспортируйте SQL-скрипт БД и ER-диаграмму
+# Что делаем
+# Сохраните итоговую структуру и данные БД.
+# Команды/код
+# 1. В phpMyAdmin выберите БД shoe2026_pu.
+# 2. Вкладка Экспорт -> формат SQL.
+# 3. Сохраните как:
+# • C:\shoe_store_2026_pu_python\sql\shoe2026_pu.sql
+# 4. Вкладка Ещё -> Дизайнер -> экспорт в PDF.
+# 5. Сохраните как:
+# • C:\shoe_store_2026_pu_python\sql\shoe2026_pu_er.pdf
+
+# Шаг 15. Соберите .exe через PyInstaller
+# Что делаем
+# Соберите исполняемый файл приложения.
+# Команды/код
+# cd C:\shoe_store_2026_pu_python\app
+# .\.venv\Scripts\activate
+# pyinstaller --noconfirm --windowed --onefile --name ShoeStore2026PUApp --icon "..\resources\icon.ico" --add-data "..\resources;resources" --collect-all PyQt6 --collect-all mysql.connector main.py
+# Результат:
+# • C:\shoe_store_2026_pu_python\app\dist\ShoeStore2026PUApp.exe
+
+# Шаг 16. Подготовьте финальный набор файлов и git-коммит
+# Что делаем
+# Проверьте комплект итоговых материалов и зафиксируйте локальный коммит.
+# Команды/код
+# Проверьте наличие:
+# • исходный код приложения (структура папок, не архив);
+# • dist\ShoeStore2026PUApp.exe;
+# • sql\shoe2026_pu.sql;
+# • sql\shoe2026_pu_er.pdf;
+# • docs\algorithm_gost.pdf;
+# • docs\report_screenshots.docx.
+# Зафиксируйте итог в локальном git-репозитории:
+# cd C:\shoe_store_2026_pu_python
+# git add .
+# git status
+# git commit -m "Финальная версия проекта (Python, Вариант 1 2026)"
+# Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
