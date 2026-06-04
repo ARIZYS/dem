@@ -354,11 +354,6 @@ class LoginDialog(QDialog):
             QLabel {{ color: black; }}
             QLineEdit {{ color: black; background-color: white; }}
             QComboBox {{ color: black; background-color: white; }}
-            QComboBox QAbstractItemView {{
-                background-color: white;
-                color: black;
-                selection-background-color: {COLOR_ACCENT};
-            }}
         """)
         
         root = QVBoxLayout(self)
@@ -434,11 +429,6 @@ class ProductFormDialog(QDialog):
             QLabel {{ color: black; }}
             QLineEdit {{ color: black; background-color: white; }}
             QComboBox {{ color: black; background-color: white; }}
-            QComboBox QAbstractItemView {{
-                background-color: white;
-                color: black;
-                selection-background-color: {COLOR_ACCENT};
-            }}
             QTextEdit {{ color: black; background-color: white; }}
         """)
 
@@ -666,29 +656,10 @@ class OrderFormDialog(QDialog):
         self.setFont(font)
         self.setStyleSheet(f"""
             QDialog {{ background-color: {COLOR_WHITE}; }}
-            QLabel {{ color: black; background-color: transparent; }}
+            QLabel {{ color: black; }}
             QLineEdit {{ color: black; background-color: white; }}
-            QComboBox {{ 
-                color: black; 
-                background-color: white;
-                selection-background-color: {COLOR_ACCENT};
-            }}
-            QComboBox QAbstractItemView {{
-                background-color: white;
-                color: black;
-                selection-background-color: {COLOR_ACCENT};
-                selection-color: black;
-            }}
-            QDateEdit {{ 
-                color: black; 
-                background-color: white;
-            }}
-            QDateEdit QAbstractItemView {{
-                background-color: white;
-                color: black;
-                selection-background-color: {COLOR_ACCENT};
-            }}
-            QPushButton {{ color: black; }}
+            QComboBox {{ color: black; background-color: white; }}
+            QDateEdit {{ color: black; background-color: white; }}
         """)
 
         root = QVBoxLayout(self)
@@ -813,60 +784,10 @@ class OrdersDialog(QDialog):
         # Установка шрифта Calibri
         font = QFont("Calibri", 10)
         self.setFont(font)
-        
-        # Полные стили для диалога заказов
         self.setStyleSheet(f"""
-            QDialog {{ 
-                background-color: {COLOR_WHITE}; 
-            }}
-            QLabel {{ 
-                color: black; 
-                background-color: transparent;
-            }}
-            QLineEdit {{ 
-                color: black; 
-                background-color: white;
-                selection-background-color: {COLOR_ACCENT};
-            }}
-            QComboBox {{ 
-                color: black; 
-                background-color: white;
-                selection-background-color: {COLOR_ACCENT};
-            }}
-            QComboBox QAbstractItemView {{
-                background-color: white;
-                color: black;
-                selection-background-color: {COLOR_ACCENT};
-                selection-color: black;
-            }}
-            QDateEdit {{ 
-                color: black; 
-                background-color: white;
-            }}
-            QDateEdit QAbstractItemView {{
-                background-color: white;
-                color: black;
-                selection-background-color: {COLOR_ACCENT};
-            }}
-            QPushButton {{ 
-                color: black; 
-                font-family: Calibri; 
-                font-size: 10pt;
-                padding: 5px;
-            }}
-            QTableWidget {{
-                background-color: white;
-                alternate-background-color: #F0F0F0;
-            }}
-            QTableWidget::item {{
-                color: black;
-            }}
-            QHeaderView::section {{
-                background-color: {COLOR_SECOND};
-                color: black;
-                font-weight: bold;
-                padding: 5px;
-            }}
+            QDialog {{ background-color: {COLOR_WHITE}; }}
+            QLabel {{ color: black; }}
+            QPushButton {{ color: black; }}
         """)
 
         root = QVBoxLayout(self)
@@ -925,6 +846,11 @@ class OrdersDialog(QDialog):
         )
         self.table.doubleClicked.connect(self.double_click_order)
         self.table.setFont(QFont("Calibri", 10))
+        self.table.setStyleSheet("""
+            QTableWidget { background-color: white; }
+            QTableWidget::item { color: black; }
+            QHeaderView::section { background-color: #00FFFF; color: black; }
+        """)
         root.addWidget(self.table)
 
         is_admin = self.user_data.role_name == "Администратор"
@@ -1165,11 +1091,6 @@ class ProductsWindow(QMainWindow):
             QLabel {{ color: black; }}
             QLineEdit {{ color: black; background-color: white; }}
             QComboBox {{ color: black; background-color: white; }}
-            QComboBox QAbstractItemView {{
-                background-color: white;
-                color: black;
-                selection-background-color: {COLOR_ACCENT};
-            }}
             QPushButton {{ color: black; }}
         """)
 
@@ -1485,4 +1406,5 @@ if __name__ == "__main__":
 # git add .
 # git status
 # git commit -m "Финальная версия проекта (Python, Вариант 1 2026)"
-# Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+#Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+#pyinstaller --noconfirm --windowed --onefile --name ShopFurniture --icon "resources\icon.ico" --add-data "resources;resources" --collect-all PyQt6 --collect-all mysql.connector app\main.py
